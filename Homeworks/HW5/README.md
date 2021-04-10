@@ -42,17 +42,23 @@ Questions
 
 1. Show your tracking results on some portion of the sequence. In addition to showing your tracking results on an easy portion of the data, identify a challenging situation where your tracker succeeds, and a challenging situation where your tracker fails.
 
+I've attached videos of tracking on both datasets. Our tracker succeeds in handling cell division, making them two distinct new tracks, but when many objects bunch together the tracker tends to convert them into a single unit.
 
 2. How do you decide to begin new tracks and terminate old tracks as the objects enter and leave the field of view?
 
+We compare the number of detected centroids to the number of assigned tracks to determine the presence of new tracks. If there are more centroids than tracks, we ascertain that a new object has entered the frame. If an object leaves the FOV, we count the number of frames where it is absent and if it surpasses the threshold we delete it.
 
 3. What happens with your algorithm when objects touch and occlude each other, and how could you handle this so you do not break track?
 
+When objects get too close or occlude each other the algorithm tends to bunch them together. Since we track objects by finding contours and their centroids, close objects fuse into one contour. One of the objects will therefore be missing from subsequent frames before it surpasses the threshold and is dropped.
 
 4. What happens when there are spurious detections that do not connect with other measurements in subsequent frames?
 
+If we detect spurious detections that do not connect with other measurements in subsequent frames, they are deleted once they reach the threshold of the number of frames for which an object can be missing.
 
 5. What are the advantages and drawbacks of different kinematic models: Do you need to model the velocity of the objects, or is it sufficient to just consider the distances between the objects in subsequent frames?
+
+Velocity is necessary to detect occlusion and enable better tracking in those situations because it gives a better estimate of location than just position.
 
 Credits and Bibliography
 Cite any papers or other references you consulted while developing your solution. Citations to papers should include the authors, the year of publication, the title of the work, and the publication information (e.g., book name and publisher; conference proceedings and location; journal name, volume and pages; technical report and institution).
