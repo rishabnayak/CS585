@@ -61,7 +61,7 @@ After downloading the pre-trained networks, you can synthesize output images ref
 
 <b>CelebA-HQ.</b> To generate images and interpolation videos, run the following command:
 ```bash
-python main.py --mode sample --num_domains 2 --resume_iter 100000 --w_hpf 1 \
+python3 main.py --mode sample --num_domains 2 --resume_iter 100000 --w_hpf 1 \
                --checkpoint_dir expr/checkpoints/celeba_hq \
                --result_dir expr/results/celeba_hq \
                --src_dir assets/representative/celeba_hq/src \
@@ -71,7 +71,7 @@ python main.py --mode sample --num_domains 2 --resume_iter 100000 --w_hpf 1 \
 To transform a custom image, first crop the image manually so that the proportion of face occupied in the whole is similar to that of CelebA-HQ. Then, run the following command for additional fine rotation and cropping. All custom images in the `inp_dir` directory will be aligned and stored in the `out_dir` directory.
 
 ```bash
-python main.py --mode align \
+python3 main.py --mode align \
                --inp_dir assets/representative/custom/female \
                --out_dir assets/representative/celeba_hq/src/female
 ```
@@ -82,7 +82,7 @@ python main.py --mode align \
 
 <b>AFHQ.</b> To generate images and interpolation videos, run the following command:
 ```bash
-python main.py --mode sample --num_domains 3 --resume_iter 100000 --w_hpf 0 \
+python3 main.py --mode sample --num_domains 3 --resume_iter 100000 --w_hpf 0 \
                --checkpoint_dir expr/checkpoints/afhq \
                --result_dir expr/results/afhq \
                --src_dir assets/representative/afhq/src \
@@ -97,7 +97,7 @@ To evaluate StarGAN v2 using [Fr&eacute;chet Inception Distance (FID)](https://a
 
 ```bash
 # celeba-hq
-python main.py --mode eval --num_domains 2 --w_hpf 1 \
+python3 main.py --mode eval --num_domains 2 --w_hpf 1 \
                --resume_iter 100000 \
                --train_img_dir data/celeba_hq/train \
                --val_img_dir data/celeba_hq/val \
@@ -105,7 +105,7 @@ python main.py --mode eval --num_domains 2 --w_hpf 1 \
                --eval_dir expr/eval/celeba_hq
 
 # afhq
-python main.py --mode eval --num_domains 3 --w_hpf 0 \
+python3 main.py --mode eval --num_domains 3 --w_hpf 0 \
                --resume_iter 100000 \
                --train_img_dir data/afhq/train \
                --val_img_dir data/afhq/val \
@@ -127,13 +127,13 @@ To train StarGAN v2 from scratch, run the following commands. Generated images a
 
 ```bash
 # celeba-hq
-python main.py --mode train --num_domains 2 --w_hpf 1 \
+python3 main.py --mode train --num_domains 2 --w_hpf 1 \
                --lambda_reg 1 --lambda_sty 1 --lambda_ds 1 --lambda_cyc 1 \
                --train_img_dir data/celeba_hq/train \
                --val_img_dir data/celeba_hq/val
 
 # afhq
-python main.py --mode train --num_domains 3 --w_hpf 0 \
+python3 main.py --mode train --num_domains 3 --w_hpf 0 \
                --lambda_reg 1 --lambda_sty 1 --lambda_ds 2 --lambda_cyc 1 \
                --train_img_dir data/afhq/train \
                --val_img_dir data/afhq/val
